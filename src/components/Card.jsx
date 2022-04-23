@@ -22,9 +22,13 @@ const Card = ({ movie }) => {
         <CardImage src={`${IMAGE_API}${movie.poster_path}`} />
         <CardTitle>{movie.original_title}</CardTitle>
         <Genres>
-          {movie.genre_ids.map((id) => (
-            <Genre key={id}>{getGenreName(id)}</Genre>
-          ))}
+          {movie.genres
+            ? movie.genres.map((genre) => (
+                <Genre key={genre.id}>{genre.name}</Genre>
+              ))
+            : movie.genre_ids.map((id) => (
+                <Genre key={id}>{getGenreName(id)}</Genre>
+              ))}
         </Genres>
       </Link>
       {isFavorite(movie.id) ? (
